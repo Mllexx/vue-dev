@@ -5,24 +5,31 @@
     <title>Lesson 2: Attributes & Basic Events</title>
     <script src="https://unpkg.com/vue@3"></script>
     <style>
-        html, body{
-            height: 100%;
-        }
-        body{
-            display: grid;
-            place-items: center;
-        }
         
     </style>
 </head>
-<body>
+<body class="h-full grid place-items-center">
     <div id="app">
-    
+        <app-button>Submit</app-button>
+        <app-button>Click Me!</app-button>
+        <app-button>Yaay!</app-button>
     </div>
     <script>
-        Vue.createApp({
-            
-        }).mount("#app");
+        let app = {
+            components: {
+                'app-button': {
+                    template: '\
+                    <button class="bg-gray-200 hover:bg-gray-400 rounded px-5 py-2 disable:cursor-not-allowed" :disabled="processing"> <slot/> </button>',
+                    data(){
+                        return {
+                            processing: false
+                        }
+                    }
+                }
+            }
+
+        };
+        Vue.createApp(app).mount("#app");
     </script>
 </body>
 </html>
